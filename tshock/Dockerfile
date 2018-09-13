@@ -40,6 +40,5 @@ EXPOSE 7777
 ENTRYPOINT ["/usr/bin/mono", \
     "--server", "--gc=sgen", "-O=all", \
     "/opt/tshock/TShockAPI/bin/Release/TerrariaServer.exe", \
-    "-config", "/data/serverconfig", \
-    "-configpath", "/data/tshock"]
+    "-config", "/data/serverconfig"]
 CMD ["--nolaunch", "--datadir=/data"]
