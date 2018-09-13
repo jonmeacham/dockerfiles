@@ -41,5 +41,5 @@ ENTRYPOINT ["/usr/bin/mono", \
     "--server", "--gc=sgen", "-O=all", \
     "/opt/tshock/TShockAPI/bin/Release/TerrariaServer.exe", \
     "-config", "/data/serverconfig", \
-    "-configpath", "/data"]
+    "-configpath", "/data/tshock"]
 CMD ["--nolaunch", "--datadir=/data"]
