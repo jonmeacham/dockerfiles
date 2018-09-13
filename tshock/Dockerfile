@@ -1,6 +1,6 @@
 # TShock provides Terraria servers with server-side characters, anti-cheat, and community management tools.
 #
-# docker run -d --name=tshock -v <config path>:/data -p 7777:7777 
+# docker run -d --name=tshock -v <config path>:/data -p 7777:7777 <image>
 
 # get mono base
 FROM mono:5.14.0.177
@@ -27,16 +27,16 @@ RUN cd /opt/tshock && \
     nuget restore && \
     xbuild ./TShock.sln /p:Configuration=Release
 
-# volume for tshock data.
+# volume for tshock data
 VOLUME /data
 
 # set the working directory
 WORKDIR /
 
-# Expose ports.
+# dxpose ports
 EXPOSE 7777
 
-# Define default command.
+# define default command
 ENTRYPOINT ["/usr/bin/mono", \
     "--server", "--gc=sgen", "-O=all", \
     "/opt/tshock/TShockAPI/bin/Release/TerrariaServer.exe", \
