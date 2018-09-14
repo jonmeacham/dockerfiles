@@ -1,6 +1,6 @@
 # TShock provides Terraria servers with server-side characters, anti-cheat, and community management tools.
 #
-# docker run -d --name=tshock -v <config path>:/opt/tshock -p 7777:7777 <image>
+# docker run -dit --name=tshock -v <config path>:/opt/tshock -p 7777:7777 <image>
 
 # get mono base
 FROM mono:5.14.0.177
