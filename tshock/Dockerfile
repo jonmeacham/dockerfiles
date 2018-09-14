@@ -22,7 +22,7 @@ VOLUME /opt/tshock
 # set the working directory
 WORKDIR /opt
 
-# dxpose ports
+# expose server port
 EXPOSE 7777
 
 # define default command
