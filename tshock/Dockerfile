@@ -10,7 +10,7 @@ RUN apt-get update && \
     apt-get install -y \
     unzip
 
-# grab tshock source
+# grab tshock release
 ENV RELEASE 4.3.25
 RUN cd /opt && \
     curl -OL "https://github.com/Pryaxis/TShock/releases/download/v${RELEASE}/tshock_${RELEASE}.zip" && \
