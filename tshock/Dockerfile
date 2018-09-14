@@ -1,44 +1,34 @@
 # TShock provides Terraria servers with server-side characters, anti-cheat, and community management tools.
 #
-# docker run -d --name=tshock -v <config path>:/data -p 7777:7777 <image>
+# docker run -d --name=tshock -v <config path>:/opt/tshock -p 7777:7777 <image>
 
 # get mono base
 FROM mono:5.14.0.177
 
-# install required packages
+# install unzip
 RUN apt-get update && \
     apt-get install -y \
-    git
+    unzip
 
 # grab tshock source
-RUN git clone --recurse-submodules https://github.com/Pryaxis/TShock.git /opt/tshock
-
-# run the build
-RUN cd /opt/tshock && \
-    nuget restore ./TerrariaServerAPI/ && \
-    xbuild ./TerrariaServerAPI/TShock.4.OTAPI.sln /p:Configuration=Release && \
-    cd ./TerrariaServerAPI/TShock.Modifications.Bootstrapper/bin/Release/ && \
-    mono TShock.Modifications.Bootstrapper.exe -in=OTAPI.dll \
-    -mod=../../../TShock.Modifications.**/bin/Release/TShock.Modifications.*.dll \ 
-    -o=Output/OTAPI.dll && \
-    cd ./../../../ && \
-    xbuild ./TerrariaServerAPI/TerrariaServerAPI.csproj /p:Configuration=Release && \
-    cd .. && \
-    nuget restore && \
-    xbuild ./TShock.sln /p:Configuration=Release
+ENV RELEASE 4.3.25
+RUN cd /opt && \
+    curl -OL "https://github.com/Pryaxis/TShock/releases/download/v${RELEASE}/tshock_${RELEASE}.zip" && \
+    unzip tshock_${RELEASE}.zip
 
 # volume for tshock data
-VOLUME /data
+VOLUME /opt/tshock
 
 # set the working directory
-WORKDIR /
+WORKDIR /opt
 
 # dxpose ports
 EXPOSE 7777
 
 # define default command
 ENTRYPOINT ["/usr/bin/mono", \
-    "--server", "--gc=sgen", "-O=all", \
-    "/opt/tshock/TShockAPI/bin/Release/TerrariaServer.exe", \
-    "-config", "/data/serverconfig"]
-CMD ["--nolaunch", "--datadir=/data"]
+    "--server", \
+    "--gc=sgen", \
+    "-O=all", \
+    "TerrariaServer.exe", \
+    "-config", "/opt/tshock/serverconfig"]
