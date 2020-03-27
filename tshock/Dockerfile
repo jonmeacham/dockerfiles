@@ -11,7 +11,7 @@ RUN apt-get update && \
     unzip
 
 # grab tshock release
-ENV RELEASE 4.3.25
+ENV RELEASE 4.3.26
 RUN cd /opt && \
     curl -OL "https://github.com/Pryaxis/TShock/releases/download/v${RELEASE}/tshock_${RELEASE}.zip" && \
     unzip tshock_${RELEASE}.zip
