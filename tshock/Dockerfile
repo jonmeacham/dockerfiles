@@ -3,7 +3,7 @@
 # docker run -dit --name=tshock -v <config path>:/opt/tshock -p 7777:7777 <image>
 
 # get mono base
-FROM mono:5.14.0.177
+FROM mono:6.8.0.96
 
 # install unzip
 RUN apt-get update && \
