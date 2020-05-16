@@ -3,7 +3,7 @@
 # docker run -dit --name=tshock -v <config path>:/opt/tshock -p 7777:7777 <image>
 
 # get mono base
-FROM mono:5.14.0.177
+FROM mono:6.8.0.96
 
 # install unzip
 RUN apt-get update && \
@@ -11,7 +11,7 @@ RUN apt-get update && \
     unzip
 
 # grab tshock release
-ENV RELEASE 4.3.25
+ENV RELEASE 4.3.26
 RUN cd /opt && \
     curl -OL "https://github.com/Pryaxis/TShock/releases/download/v${RELEASE}/tshock_${RELEASE}.zip" && \
     unzip tshock_${RELEASE}.zip
