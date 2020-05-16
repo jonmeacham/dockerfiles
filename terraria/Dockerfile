@@ -11,13 +11,14 @@ RUN apt-get update && \
     unzip
 
 # download server archive
-ENV RELEASE 1353
+ENV RELEASE 1401
 RUN cd /opt && \
     curl -OL "http://terraria.org/server/terraria-server-${RELEASE}.zip" && \
     unzip terraria-server-${RELEASE}.zip && \
     rm -rfv ./${RELEASE}/Mac/ && \
     rm -rfv ./${RELEASE}/Windows/ && \
-    rm -fv ./${RELEASE}/Linux/System.dll
+    chmod +x ./${RELEASE}/Linux/TerrariaServer && \
+    chmod +x ./${RELEASE}/Linux/TerrariaServer.bin.x86_64
 
 # server config volume
 VOLUME /opt/terraria
@@ -29,9 +30,5 @@ WORKDIR /opt
 EXPOSE 7777
 
 # start server by default
-ENTRYPOINT ["/usr/bin/mono", \
-    "--server", \
-    "--gc=sgen", \
-    "-O=all", \
-    "./1353/Linux/TerrariaServer.exe", \
+ENTRYPOINT ["./1401/Linux/TerrariaServer", \
     "-config", "/opt/terraria/serverconfig"]
