@@ -11,11 +11,11 @@ RUN apt-get update && \
     unzip
 
 # download server archive
-ENV RELEASE 1404
+ENV RELEASE 1405
 RUN cd /opt && \
     #curl -OL "http://terraria.org/server/terraria-server-${RELEASE}.zip" && \
     # temporarily use new nonstandard server archive download URL
-    curl -OL "https://www.terraria.org/system/dedicated_servers/archives/000/000/038/original/terraria-server-1404.zip" && \
+    curl -OL "https://www.terraria.org/system/dedicated_servers/archives/000/000/039/original/terraria-server-1405.zip" && \
     unzip terraria-server-${RELEASE}.zip && \
     rm -rfv ./${RELEASE}/Mac/ && \
     rm -rfv ./${RELEASE}/Windows/ && \
@@ -32,5 +32,5 @@ WORKDIR /opt
 EXPOSE 7777
 
 # start server by default
-ENTRYPOINT ["./1404/Linux/TerrariaServer", \
+ENTRYPOINT ["./1405/Linux/TerrariaServer", \
     "-config", "/opt/terraria/serverconfig"]
