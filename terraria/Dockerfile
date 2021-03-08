@@ -3,7 +3,7 @@
 # docker run -dit --name=terraria -v <config dir>:/opt/terraria -p 7777:7777 jonmeacham/terraria:latest
 
 # get mono base
-FROM mono:6.8.0.123
+FROM mono:6.12.0.107
 
 # install unzip
 RUN apt-get update && \
